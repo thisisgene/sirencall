@@ -47,7 +47,9 @@ function handleDeviceOrientation(event) {
     const depth = movementFactor[layer.id] // Get layer id
     const moveX = (event.gamma * depth) / 100
     const moveY = (event.beta * depth) / 100
-    layer.style.transform = `translate(${moveX}px, ${moveY}px) scale(${scale})` // Maintain the scale
+    layer.style.transform = `translate(${moveX * 10}px, ${
+      moveY * 4
+    }px) scale(${scale})` // Maintain the scale
   })
 }
 
