@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Siren Call | Eugene Delta</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <!-- invisible image to get loaded as background image -->
+    <!-- <img
+      id="background-image"
+      src="assets/images/sirencall_background.jpg"
+      alt="photo"
+    />
+    <video
+      id="background-video"
+      autoplay
+      loop
+      muted
+      poster="assets/images/sirencall_background.jpg"
+    >
+      <source src="assets/video/back.mp4" type="video/mp4" />
+    </video> -->
+    <div id="parallax">
+      <div id="layer1" class="layer">
+        <video
+          autoplay
+          muted
+          loop
+          id="video"
+          style="
+            background-image: url('assets/images/sirencall_background_empty.jpg');
+          "
+        >
+          <source
+            src="assets/video/sirencall_back_video.mp4"
+            type="video/mp4"
+          />
+          <!-- Add alternative file types for better compatibility -->
+          <!-- <source src="background.webm" type="video/webm"> -->
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+      <div
+        id="layer3"
+        class="layer"
+        style="background-image: url('assets/images/sirencall_foreground1.png')"
+      ></div>
+      <div
+        id="layer2"
+        class="layer"
+        style="background-image: url('assets/images/sirencall_foreground2.png')"
+      ></div>
+      <div
+        id="fog"
+        class="layer"
+        style="background-image: url('assets/images/fog.png')"
+      ></div>
+      <div id="layer4" class="layer">
+        <div class="container">
+          <div class="title-image">
+            <img src="assets/images/sirencall_title.png" alt="title" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+  </body>
+</html>
