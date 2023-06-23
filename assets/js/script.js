@@ -41,7 +41,7 @@ document.addEventListener("mousemove", function (e) {
   })
 })
 
-window.addEventListener("deviceorientation", function (event) {
+function handleDeviceOrientation(event) {
   const layers = document.querySelectorAll("#parallax .layer")
   layers.forEach((layer) => {
     const depth = movementFactor[layer.id] // Get layer id
@@ -49,4 +49,41 @@ window.addEventListener("deviceorientation", function (event) {
     const moveY = (event.beta * depth) / 100
     layer.style.transform = `translate(${moveX}px, ${moveY}px) scale(${scale})` // Maintain the scale
   })
-})
+}
+
+// Check if the DeviceOrientationEvent API is available
+if (
+  typeof DeviceOrientationEvent !== "undefined" &&
+  typeof DeviceOrientationEvent.requestPermission === "function"
+) {
+  // iOS 13+ and some latest Android devices
+
+  // Button to request permission
+  const button = document.createElement("button")
+  button.innerText = "Enable Gyroscope"
+  document.body.appendChild(button)
+
+  button.addEventListener("click", function () {
+    DeviceOrientationEvent.requestPermission()
+      .then((response) => {
+        if (response === "granted") {
+          // Permission granted
+          window.addEventListener(
+            "deviceorientation",
+            handleDeviceOrientation,
+            true
+          )
+        }
+      })
+      .catch(console.error)
+  })
+} else {
+  // Other devices
+  window.addEventListener("deviceorientation", handleDeviceOrientation, true)
+}
+
+document
+  .querySelector(".title-image")
+  .addEventListener("animationend", function () {
+    document.querySelector(".container").style.pointerEvents = "auto"
+  })

@@ -92,6 +92,8 @@ body.bg-loaded::after {
   align-items: center;
   /* background-color: rgba(255, 255, 255, 0.3); */
   border-radius: 10px;
+
+  pointer-events: none; /* will be changed by js after intro animation */
 }
 .container:hover {
   background-color: rgba(255, 255, 255, 0);
@@ -101,16 +103,19 @@ body.bg-loaded::after {
   mix-blend-mode: luminosity;
   transition: 0.5s ease;
   opacity: 0.5;
-  transform: scale(0.9);
+  transform: scale(1);
 }
 .container:hover .title-image {
   mix-blend-mode: normal;
   opacity: 1;
-  transform: scale(1);
+  transform: scale(1.02);
 }
 .title-image img {
   width: 100%;
   height: auto;
+  opacity: 0;
+  transform: scale(1.5);
+  animation: intro-animation 6s 1s ease-in-out forwards;
 }
 .description-container {
   display: flex;
@@ -127,31 +132,76 @@ body.bg-loaded::after {
   opacity: 0;
 }
 .link-container {
+  width: 80%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   margin-top: 20px;
   opacity: 0;
-  transform: translateY(100%);
+  filter: blur(1px);
+  background: rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  padding: 1rem 2rem;
+  transform: translateY(-100px);
   transition: 0.5s ease;
+  animation: link-intro-animation 6s 2s ease-in-out forwards;
 }
 .container:hover .link-container {
   opacity: 1;
-  transform: translateY(0);
+  filter: blur(0);
+  background: rgba(0, 0, 0, 0.1);
+  /* transform: translateY(0); */
 }
-.ref-link {
-  display: flex;
+.link-container a {
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
+  display: block;
+  font-size: 3rem;
+  color: white;
   text-decoration: none;
-  color: #111;
+  transition: 0.2s ease;
 }
-.ref-link img {
-  width: 50px;
-  height: 50px;
-  margin: 10px;
-  transition: 0.5s ease;
+.link-container a:hover {
+  transform: scale(1.1);
+}
+.fa-tidal {
+  height: 3rem;
+  filter: invert(1);
+}
+.fa-tidal img {
+  height: 100%;
+  width: auto;
+}
+@keyframes intro-animation {
+  0% {
+    opacity: 0;
+    transform: scale(1.5) translateY(0); /* Starts larger and centered */
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1.5) translateY(0); /* Stays larger and centered */
+  }
+  50%,
+  100% {
+    opacity: 1;
+    transform: scale(1.2) translateY(-20%); /* Ends at normal size and moved upwards */
+  }
+}
+@keyframes link-intro-animation {
+  0% {
+    opacity: 0;
+    transform: translateY(50%); /* Starts larger and centered */
+  }
+  20% {
+    opacity: 0;
+    transform: translateY(50%); /* Stays larger and centered */
+  }
+  50%,
+  100% {
+    opacity: 0.8;
+    transform: scale(1) translateY(-60%); /* Ends at normal size and moved upwards */
+  }
 }
 
 @keyframes fog-animation {
@@ -163,6 +213,12 @@ body.bg-loaded::after {
   }
 }
 
+@media only screen and (max-width: 920px) {
+  .container {
+    width: 80%; /* Adjust this to fit the screen better */
+    /* height: auto; If you want to adjust the height as well */
+  }
+}
 @media only screen and (max-width: 768px) {
   #layer1 {
     background-position: left top;
@@ -182,17 +238,67 @@ body.bg-loaded::after {
   }
 
   .container {
-    width: 90%; /* Adjust this to fit the screen better */
+    width: 80%; /* Adjust this to fit the screen better */
     /* height: auto; If you want to adjust the height as well */
   }
 
   .title-image {
-    max-width: 90%; /* Adjust this to fit the screen better */
+    max-width: 100%; /* Adjust this to fit the screen better */
     opacity: 1;
+    transform: scale(1);
   }
 
   .description-container {
     width: 80%; /* Adjust this to fit the screen better */
     font-size: 1.5rem; /* Adjust this to fit the screen better */
+  }
+
+  .link-container {
+    width: 100%; /* Adjust this to fit the screen better */
+    padding: 2rem 1rem; /* Adjust this to fit the screen better */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    filter: blur(0);
+  }
+
+  @keyframes intro-animation {
+    0% {
+      opacity: 0;
+      transform: scale(1) translateY(60%); /* Starts larger and centered */
+    }
+    20% {
+      opacity: 1;
+      transform: scale(1) translateY(60%); /* Stays larger and centered */
+    }
+    50%,
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(-30%); /* Ends at normal size and moved upwards */
+    }
+  }
+  @keyframes link-intro-animation {
+    0% {
+      opacity: 0;
+      transform: translateY(50%); /* Starts larger and centered */
+    }
+    20% {
+      opacity: 0;
+      transform: translateY(50%); /* Stays larger and centered */
+    }
+    50%,
+    100% {
+      opacity: 0.8;
+      transform: scale(1) translateY(0%); /* Ends at normal size and moved upwards */
+    }
   }
 }
