@@ -47,8 +47,8 @@ function handleDeviceOrientation(event) {
     const depth = movementFactor[layer.id] // Get layer id
     const moveX = (event.gamma * depth) / 100
     const moveY = (event.beta * depth) / 100
-    layer.style.transform = `translate(${moveX * 10}px, ${
-      moveY * 4
+    layer.style.transform = `translate(${moveX * 14}px, ${
+      moveY * 5
     }px) scale(${scale})` // Maintain the scale
   })
 }
@@ -87,5 +87,130 @@ if (
 document
   .querySelector(".title-image")
   .addEventListener("animationend", function () {
-    document.querySelector(".container").style.pointerEvents = "auto"
+    document.querySelector("#container1").style.pointerEvents = "auto"
   })
+
+// This code loads the IFrame Player API code asynchronously.
+var tag = document.createElement("script")
+tag.src = "https://www.youtube.com/iframe_api"
+var firstScriptTag = document.getElementsByTagName("script")[0]
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+
+// This function creates an <iframe> (and YouTube player)
+// after the API code downloads.
+var player
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player("player", {
+    height: "100%",
+    width: "100%",
+    videoId: "v2z0J4_l0Hc",
+    playerVars: {
+      playsinline: 1,
+      autoplay: 0, // Don't autoplay the video initially
+      controls: 1, // Don't show controls
+      showinfo: 0, // Don't show video info
+    },
+    events: {
+      onStateChange: onPlayerStateChange,
+    },
+  })
+}
+
+function onPlayerStateChange(event) {
+  // Here you can handle player state changes, if necessary
+}
+
+const container1 = document.getElementById("container1")
+const container2 = document.getElementById("container2")
+const container3 = document.getElementById("container3")
+
+// move camera up
+document.querySelector("#change-video").addEventListener("click", function () {
+  // Begin the fade out of the first video and fade in of the second video
+  let video1 = document.querySelector("#video1")
+  let video2 = document.querySelector("#video2")
+  video1.style.opacity = "0"
+  video2.style.opacity = "1"
+  video2.playbackRate = 1.3
+  video2.play()
+
+  // Move out the first container
+  let container1 = document.querySelector("#container1")
+  // document.querySelector("#layer2").classList.remove("layer")
+  document.querySelector("#layer2").classList.add("to-left")
+  document.querySelector("#layer3").classList.add("to-right")
+  container1.style.animation = "move-out 2s forwards"
+  container1.addEventListener(
+    "animationend",
+    function () {
+      container2.style.display = "flex"
+      container2.style.animation = "move-in 2s"
+      container2.style.pointerEvents = "auto"
+    },
+    { once: true }
+  ) // Remove the event listener after it has been called once
+  container2.addEventListener(
+    "animationend",
+    function () {
+      container2.style.animation = "fade-in-background .5s forwards"
+      player.playVideo()
+    },
+    { once: true }
+  ) // Remove the event listener after it has been called once
+})
+
+document
+  .querySelector("#reverse-button")
+  .addEventListener("click", function () {
+    // Restart and fade in the first video
+    let video1 = document.querySelector("#video1")
+    let video2 = document.querySelector("#video2")
+    video2.pause()
+    video2.currentTime = 0
+    video2.style.opacity = "0"
+    video1.style.opacity = "1"
+    video1.playbackRate = 1.8
+    video1.play()
+
+    // Move out the second container
+    // document.querySelector("#youtube-video").src += "&autoplay=0"
+    player.stopVideo()
+
+    container2.style.animation = "fade-out-background .5s forwards"
+    container2.addEventListener(
+      "animationend",
+      function () {
+        container2.style.animation = "move-out-up 2s forwards"
+        container1.style.display = "flex"
+        container1.style.animation = "move-in-up 2s"
+        container1.style.pointerEvents = "auto"
+        document.querySelector("#layer2").classList.remove("to-left")
+        document.querySelector("#layer3").classList.remove("to-right")
+        container2.addEventListener("animationend", function () {}, {
+          once: true,
+        }) // Remove the event listener after it has been called once
+      },
+      { once: true }
+    )
+  })
+
+// Get the button
+const streamingButton = document.getElementById("streaming-button")
+
+streamingButton.addEventListener("click", function () {
+  // Move container1 up
+  container1.style.animation = "move-out-up 1s forwards"
+
+  container3.style.display = "flex"
+  container3.style.pointerEvents = "auto"
+  container3.style.animation = "move-in-up 1s forwards"
+})
+
+const backUpButton = document.getElementById("back-up-button")
+
+backUpButton.addEventListener("click", function () {
+  container3.style.animation = "move-out 1s forwards"
+
+  container1.style.display = "flex"
+  container1.style.animation = "move-in 1s forwards"
+})

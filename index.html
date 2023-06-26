@@ -32,7 +32,7 @@
           autoplay
           muted
           loop
-          id="video"
+          id="video1"
           style="
             background-image: url('assets/images/sirencall_background_empty.jpg');
           "
@@ -45,79 +45,101 @@
           <!-- <source src="background.webm" type="video/webm"> -->
           Your browser does not support HTML5 video.
         </video>
+        <video
+          muted
+          id="video2"
+          style="
+            background-image: url('assets/images/sirencall_background_empty.jpg');
+          "
+          style="display: none"
+        >
+          <source
+            src="assets/video/sirencall_back_video_up.mp4"
+            type="video/mp4"
+          />
+          <!-- Add alternative file types for better compatibility -->
+          <!-- <source src="background.webm" type="video/webm"> -->
+          Your browser does not support HTML5 video.
+        </video>
       </div>
-      <div
-        id="layer3"
-        class="layer"
-        style="background-image: url('assets/images/sirencall_foreground1.png')"
-      ></div>
       <div
         id="layer2"
         class="layer"
         style="background-image: url('assets/images/sirencall_foreground2.png')"
       ></div>
       <div
+        id="layer3"
+        class="layer"
+        style="background-image: url('assets/images/sirencall_foreground1.png')"
+      ></div>
+      <div
         id="fog"
         class="layer"
         style="background-image: url('assets/images/fog.png')"
       ></div>
-      <div id="layer4" class="layer">
-        <div class="container">
-          <div class="title-image">
-            <img src="assets/images/sirencall_title.png" alt="title" />
-          </div>
-          <div class="link-container">
-            <!-- YouTube -->
-            <a
-              href="https://www.youtube.com/channel/YourChannelHere"
-              target="_blank"
-              class="fab fa-youtube"
-            ></a>
+    </div>
+    <div id="layer4" class="layer">
+      <div class="container" id="container2" style="display: none">
+        <div class="video-container">
+          <div id="player"></div>
+        </div>
+        <button id="reverse-button">Go Back</button>
+      </div>
+      <div class="container" id="container1">
+        <button id="change-video">Watch the Video</button>
+        <div class="title-image">
+          <img src="assets/images/sirencall_title.png" alt="title" />
+        </div>
+        <button id="streaming-button">Listen to the Song</button>
+      </div>
+      <div id="container3" class="container">
+        <button id="back-up-button">Go back</button>
+        <br />
+        <br />
+        <div class="link-container">
+          <a
+            href="https://www.youtube.com/channel/YourChannelHere"
+            target="_blank"
+            class="fab fa-youtube"
+          ></a>
 
-            <!-- Bandcamp -->
-            <a
-              href="https://YourName.bandcamp.com"
-              target="_blank"
-              class="fab fa-bandcamp"
-            ></a>
+          <a
+            href="https://YourName.bandcamp.com"
+            target="_blank"
+            class="fab fa-bandcamp"
+          ></a>
 
-            <!-- Spotify -->
-            <a
-              href="https://open.spotify.com/artist/YourArtistIdHere"
-              target="_blank"
-              class="fab fa-spotify"
-            ></a>
+          <a
+            href="https://open.spotify.com/artist/YourArtistIdHere"
+            target="_blank"
+            class="fab fa-spotify"
+          ></a>
 
-            <!-- Tidal -->
-            <a
-              href="https://tidal.com/browse/artist/YourArtistIdHere"
-              target="_blank"
-              class="fab fa-tidal"
-            >
-              <img src="assets/images/tidal.svg" alt="tidal" />
-            </a>
+          <a
+            href="https://tidal.com/browse/artist/YourArtistIdHere"
+            target="_blank"
+            class="fab fa-tidal"
+          >
+            <img src="assets/images/tidal.svg" alt="tidal" />
+          </a>
 
-            <!-- Apple Music -->
-            <a
-              href="https://music.apple.com/us/artist/YourArtistIdHere"
-              target="_blank"
-              class="fab fa-apple"
-            ></a>
+          <a
+            href="https://music.apple.com/us/artist/YourArtistIdHere"
+            target="_blank"
+            class="fab fa-apple"
+          ></a>
 
-            <!-- Deezer -->
-            <a
-              href="https://www.deezer.com/us/artist/YourArtistIdHere"
-              target="_blank"
-              class="fab fa-deezer"
-            ></a>
+          <a
+            href="https://www.deezer.com/us/artist/YourArtistIdHere"
+            target="_blank"
+            class="fab fa-deezer"
+          ></a>
 
-            <!-- Amazon -->
-            <a
-              href="https://www.amazon.com/music/artist/YourArtistIdHere"
-              target="_blank"
-              class="fab fa-amazon"
-            ></a>
-          </div>
+          <a
+            href="https://www.amazon.com/music/artist/YourArtistIdHere"
+            target="_blank"
+            class="fab fa-amazon"
+          ></a>
         </div>
       </div>
     </div>

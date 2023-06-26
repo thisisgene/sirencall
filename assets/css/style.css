@@ -9,6 +9,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "Roboto", sans-serif;
 }
 /* body::after {
   position: absolute;
@@ -60,10 +61,23 @@ body.bg-loaded::after {
   transition: transform 0.1s ease;
 }
 #layer1 video {
-  object-fit: cover;
-  height: 104%;
+  position: absolute;
   width: 104%;
+  height: 104%;
+  object-fit: cover;
   filter: blur(4px);
+
+  transition: opacity 1s;
+}
+
+#video1 {
+  opacity: 1;
+  z-index: 2;
+}
+
+#video2 {
+  opacity: 0;
+  z-index: 1;
 }
 
 #layer3 {
@@ -72,8 +86,10 @@ body.bg-loaded::after {
 #layer4 {
   z-index: 10;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 #fog {
@@ -82,24 +98,81 @@ body.bg-loaded::after {
   background-size: 200% 100%;
 }
 
+/* Add move-out animations */
+@keyframes move-out-left {
+  100% {
+    transform: translate(-2000px, 0px) scale(1.04); /* Adjust move distance based on your needs */
+  }
+}
+
+@keyframes move-out-right {
+  100% {
+    transform: translate(2000px, 0px) scale(1.04); /* Adjust move distance based on your needs */
+  }
+}
+
+.to-left {
+  animation: move-out-left 2s forwards;
+}
+
+.to-right {
+  animation: move-out-right 2s forwards;
+}
+#change-button {
+  position: absolute;
+  margin-top: -20rem;
+  transform: translateY(-150%);
+  z-index: 100;
+}
 .container {
-  position: relative;
-  width: 50%;
-  /* height: 50%; */
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-color: rgba(255, 255, 255, 0.3); */
-  border-radius: 10px;
-
+  transition: all 1s;
   pointer-events: none; /* will be changed by js after intro animation */
 }
 .container:hover {
   background-color: rgba(255, 255, 255, 0);
 }
+#container2,
+#container3 {
+  display: none;
+}
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* This is the aspect ratio for HD videos. */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  transition: all 1s;
+}
+
+#player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (min-width: 600px) {
+  /* Adjust as necessary for your breakpoint. */
+  .video-container {
+    width: 80%;
+    margin: 0 auto; /* Centers the container. */
+  }
+}
 .title-image {
-  max-width: 80%;
+  max-width: 60%;
   mix-blend-mode: luminosity;
   transition: 0.5s ease;
   opacity: 0.5;
@@ -115,7 +188,7 @@ body.bg-loaded::after {
   height: auto;
   opacity: 0;
   transform: scale(1.5);
-  animation: intro-animation 6s 1s ease-in-out forwards;
+  animation: intro-animation 4s ease-in-out forwards;
 }
 .description-container {
   display: flex;
@@ -137,14 +210,11 @@ body.bg-loaded::after {
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
-  opacity: 0;
   filter: blur(1px);
   background: rgba(0, 0, 0, 0);
   border-radius: 10px;
   padding: 1rem 2rem;
-  transform: translateY(-100px);
   transition: 0.5s ease;
-  animation: link-intro-animation 6s 2s ease-in-out forwards;
 }
 .container:hover .link-container {
   opacity: 1;
@@ -173,6 +243,29 @@ body.bg-loaded::after {
   height: 100%;
   width: auto;
 }
+
+button {
+  background: rgba(255, 255, 220, 0.3);
+  border: 2px solid #fff;
+  outline: none;
+  border-radius: 10px;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  color: #1a1c1a;
+  font-size: 1.2rem;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+  transition: 0.2s ease;
+  opacity: 0;
+  animation: fade-in 2s 2s forwards;
+}
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.2);
+}
+#reverse-button {
+  margin-top: 1rem;
+}
+
 @keyframes intro-animation {
   0% {
     opacity: 0;
@@ -185,7 +278,7 @@ body.bg-loaded::after {
   50%,
   100% {
     opacity: 1;
-    transform: scale(1.2) translateY(-20%); /* Ends at normal size and moved upwards */
+    transform: scale(1) translateY(0%); /* Ends at normal size and moved upwards */
   }
 }
 @keyframes link-intro-animation {
@@ -212,12 +305,74 @@ body.bg-loaded::after {
     background-position: -100% 0;
   }
 }
+@keyframes cross-fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in-background {
+  0% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+@keyframes fade-out-background {
+  0% {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+@keyframes move-out {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100vh);
+  } /* move down by the height of the viewport */
+}
+
+@keyframes move-in {
+  0% {
+    transform: translateY(-100vh);
+  } /* move down from the top of the viewport */
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes move-out-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100vh);
+  } /* move up by the height of the viewport */
+}
+
+@keyframes move-in-up {
+  0% {
+    transform: translateY(100vh);
+  } /* move up from the top of the viewport */
+  100% {
+    transform: translateY(0);
+  }
+}
 
 @media only screen and (max-width: 920px) {
-  .container {
-    width: 80%; /* Adjust this to fit the screen better */
-    /* height: auto; If you want to adjust the height as well */
-  }
 }
 @media only screen and (max-width: 768px) {
   #layer1 {
@@ -233,13 +388,10 @@ body.bg-loaded::after {
   }
 
   #layer4 {
-    /* flex-direction: column;
-    justify-content: flex-start; */
+    flex-direction: column;
   }
 
   .container {
-    width: 80%; /* Adjust this to fit the screen better */
-    /* height: auto; If you want to adjust the height as well */
   }
 
   .title-image {
@@ -271,19 +423,22 @@ body.bg-loaded::after {
     filter: blur(0);
   }
 
+  button {
+    font-size: 2rem;
+  }
   @keyframes intro-animation {
     0% {
       opacity: 0;
-      transform: scale(1) translateY(60%); /* Starts larger and centered */
+      transform: scale(1.07) translateY(0%); /* Starts larger and centered */
     }
     20% {
       opacity: 1;
-      transform: scale(1) translateY(60%); /* Stays larger and centered */
+      transform: scale(1.07) translateY(0%); /* Stays larger and centered */
     }
     50%,
     100% {
       opacity: 1;
-      transform: scale(1) translateY(-30%); /* Ends at normal size and moved upwards */
+      transform: scale(1) translateY(0%); /* Ends at normal size and moved upwards */
     }
   }
   @keyframes link-intro-animation {
