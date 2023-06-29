@@ -47,8 +47,8 @@ function handleDeviceOrientation(event) {
     const depth = movementFactor[layer.id] // Get layer id
     const moveX = (event.gamma * depth) / 100
     const moveY = (event.beta * depth) / 100
-    layer.style.transform = `translate(${moveX * 14}px, ${
-      moveY * 5
+    layer.style.transform = `translate(${moveX * 10}px, ${
+      moveY * 3
     }px) scale(${scale})` // Maintain the scale
   })
 }
@@ -201,7 +201,7 @@ streamingButton.addEventListener("click", function () {
   // Move container1 up
   container1.style.animation = "move-out-up 1s forwards"
 
-  container3.style.display = "flex"
+  container3.style.display = "block"
   container3.style.pointerEvents = "auto"
   container3.style.animation = "move-in-up 1s forwards"
 })
