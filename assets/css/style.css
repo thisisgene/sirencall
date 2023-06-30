@@ -522,6 +522,7 @@ button:hover {
     max-width: 100%; /* Adjust this to fit the screen better */
     opacity: 1;
     transform: scale(1);
+    margin: 1rem auto 0.5rem;
   }
 
   .description-container {
