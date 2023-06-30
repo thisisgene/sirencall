@@ -88,6 +88,7 @@ document
   .querySelector(".title-image")
   .addEventListener("animationend", function () {
     document.querySelector("#container1").style.pointerEvents = "auto"
+    document.querySelector("#bandcamp-player").style.opacity = "1"
   })
 
 // This code loads the IFrame Player API code asynchronously.

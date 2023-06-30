@@ -240,6 +240,11 @@ body.bg-loaded::after {
   opacity: 1;
   transform: scale(1.02);
 }
+
+#bandcamp-player {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
 .title-image img {
   width: 100%;
   height: auto;
@@ -311,7 +316,44 @@ body.bg-loaded::after {
   height: 100%;
   width: auto;
 }
-
+.contact-container {
+  width: 80%;
+  max-width: 600px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem auto;
+  /* filter: blur(1px); */
+  background: rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  padding: 1rem 2rem;
+  transition: 0.5s ease;
+  /* animation: link-intro-animation 4s ease-in-out forwards; */
+}
+.contact-container a {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  /* height: 2rem; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 2rem;
+  color: #111;
+  opacity: 0.5;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+.contact-container a:hover {
+  opacity: 1;
+}
+.contact-container a span {
+  font-family: "Agdasima", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+}
 button {
   background: rgba(255, 255, 255, 0.4);
   border: none;
