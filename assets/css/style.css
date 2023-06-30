@@ -597,3 +597,19 @@ button:hover {
     font-size: 3.8rem;
   }
 }
+
+/* media query for landscape phone */
+@media only screen and (max-width: 900px) and (orientation: landscape) {
+  .link-container {
+    margin: 1rem auto;
+  }
+  .link-container a {
+    font-size: 2rem;
+  }
+  .title1 {
+    font-size: 3rem;
+  }
+  .title2 {
+    font-size: 3.8rem;
+  }
+}
