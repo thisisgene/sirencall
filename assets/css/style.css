@@ -233,6 +233,7 @@ body.bg-loaded::after {
 }
 .title2 {
   font-size: 8rem;
+  margin-bottom: 1rem;
 }
 .container:hover .title-image {
   mix-blend-mode: normal;
@@ -284,12 +285,20 @@ body.bg-loaded::after {
   /* display: flex;
   justify-content: center;
   align-items: center; */
-
-  display: block;
+  /* height: 2rem; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 3rem;
   color: white;
   text-decoration: none;
   transition: 0.2s ease;
+}
+.link-container a span {
+  font-family: "Agdasima", sans-serif;
+  font-size: 1rem;
 }
 .link-container a:hover {
   transform: scale(1.1);
@@ -304,7 +313,7 @@ body.bg-loaded::after {
 }
 
 button {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.4);
   border: none;
   outline: none;
   border-radius: 8px;
